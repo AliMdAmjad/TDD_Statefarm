@@ -6,6 +6,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.statefarm.qa.common.CommonFunctions;
+import static com.statefarm.qa.utils.DataMap.*;
+
+import java.util.Map;
 
 public class AutoQuote {
 	CommonFunctions commons;
@@ -74,6 +77,17 @@ public class AutoQuote {
 		typeLastName(lastname);
 		typeAddrerss(address);
 		typeDob(dob);
+		clickAtTermsCondition();
+		clickNextVehicles();
+
+	}
+	
+	public void getQuoteSteps(Map<String , String> map) {
+		typeFirstName(map.get(FirstName.getValue()));
+		typeMiddleName(map.get(MiddleName.getValue()));
+		typeLastName(map.get(LastName.getValue()));
+		typeAddrerss(map.get(Address.name()));
+		typeDob(map.get(DOB.name()));
 		clickAtTermsCondition();
 		clickNextVehicles();
 

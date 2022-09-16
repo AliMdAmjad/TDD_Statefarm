@@ -1,12 +1,14 @@
 package com.statefarm.qa.objects;
 
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+import java.util.Map;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.statefarm.qa.common.CommonFunctions;
+import static com.statefarm.qa.utils.DataMap.*;
 
 public class HomePage {
 
@@ -44,6 +46,14 @@ public class HomePage {
 	public void homepageSteps(String value) {
 		
 		inputZipCode(value);
+		clickAtGetQuote();
+		
+		
+	}
+	
+public void homepageSteps(Map<String, String> map) {
+		
+		inputZipCode(map.get(ZipCode.getValue()));
 		clickAtGetQuote();
 		
 		
