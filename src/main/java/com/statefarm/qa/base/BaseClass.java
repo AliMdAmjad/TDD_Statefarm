@@ -40,12 +40,12 @@ public class BaseClass {
 
 	protected HomePage homePage;
 	protected AutoQuote autoQuote;
-	
+
 	@BeforeSuite
 	public void initiatingReport() {
 		extent = ExtentManager.initiatingReport();
 	}
-	
+
 	@BeforeMethod
 	public void beforeEachTest(Method method) {
 		String className = method.getDeclaringClass().getSimpleName();
@@ -59,22 +59,24 @@ public class BaseClass {
 		driver = localDriver(browser1);
 		driver.manage().window().maximize();
 		driver.get(configuration.get("url"));
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(Integer.parseInt(configuration.get("pageloadWait"))));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(configuration.get("implicitWait"))));
+		driver.manage().timeouts()
+				.pageLoadTimeout(Duration.ofSeconds(Integer.parseInt(configuration.get("pageloadWait"))));
+		driver.manage().timeouts()
+				.implicitlyWait(Duration.ofSeconds(Integer.parseInt(configuration.get("implicitWait"))));
 		wait = new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(configuration.get("explicitWait"))));
 		initClasses();
 	}
-	
+
 	@AfterMethod
 	public void afterEachTest(Method method, ITestResult result) {
-		for(String group: result.getMethod().getGroups()) {
+		for (String group : result.getMethod().getGroups()) {
 			ExtentTestManager.getTest().assignCategory(group);
 		}
-		if(result.getStatus() == ITestResult.SUCCESS) {
+		if (result.getStatus() == ITestResult.SUCCESS) {
 			ExtentTestManager.getTest().log(Status.PASS, "TEST PASSED");
-		}else if(result.getStatus() == ITestResult.SKIP) {
+		} else if (result.getStatus() == ITestResult.SKIP) {
 			ExtentTestManager.getTest().log(Status.SKIP, "TEST SKIPPED");
-		}else {
+		} else {
 			ExtentTestManager.getTest().log(Status.FAIL, "TEST FAILED \n" + result.getThrowable());
 			ExtentTestManager.getTest().addScreenCaptureFromPath(commons.getScreenshot(method.getName()));
 		}

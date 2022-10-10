@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import com.statefarm.qa.common.CommonFunctions;
+import com.statefarm.qa.utils.AutoData;
+
 import static com.statefarm.qa.utils.DataMap.*;
 
 import java.util.Map;
@@ -88,6 +90,17 @@ public class AutoQuote {
 		typeLastName(map.get(LastName.getValue()));
 		typeAddrerss(map.get(Address.name()));
 		typeDob(map.get(DOB.name()));
+		clickAtTermsCondition();
+		clickNextVehicles();
+
+	}
+	
+	public void getQuoteSteps(AutoData autoData) {
+		typeFirstName(autoData.getFirstName());
+		typeMiddleName(autoData.getMiddleName());
+		typeLastName(autoData.getLastName());
+		typeAddrerss(autoData.getLastName());
+		typeDob(autoData.getDob());
 		clickAtTermsCondition();
 		clickNextVehicles();
 
